@@ -18,11 +18,11 @@ jobs:
       - name: Publish Image to docker hub
         run: docker push izygabs/hrapp-server:latest
 
-deploy:
-  needs: build
-  runs-on: self-hosted
-  steps:
-    - name: Pull image from docker hub
-      run: docker pull izygabs/hrapp-server:latest
-    - name: Run Docker Container
-      run: docker run -d -p 8080:8080 --name hrapp-server-container -e MONGO_PASSWORD= `${{ secrets.MONGO_PASSWORD }}` izygabs/hrapp-server
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull izygabs/hrapp-server:latest
+      - name: Run Docker Container
+        run: docker run -d -p 8080:8080 --name hrapp-server-container -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} izygabs/hrapp-server
