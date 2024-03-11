@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use(routes);
 
-app.post("/home", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Naija 01 is life");
 });
 
