@@ -24,5 +24,7 @@ jobs:
     steps:
       - name: Pull image from docker hub
         run: docker pull izygabs/hrapp-server:latest
+      - name: Remove existing container if exists
+        run: docker rm -f hrapp-server-container || true
       - name: Run Docker Container
-        run: docker run -d -p 8080:8080 --name hrapp-server-container -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} izygabs/hrapp-server
+        run: docker run -d -p 8080:8080 --name hrapp-server-container -e MONGO_PASSWORD=`${{ secrets.MONGO_PASSWORD }}` izygabs/hrapp-server
